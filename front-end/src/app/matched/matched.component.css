@@ -50,8 +50,10 @@ h1 {
 	border-radius: 3px;
 }
 	.nav {
+		margin-top: 5px;
 	width: 80%;
 	margin-left: 10%;
+	padding-top: 3px;
 }
 
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
