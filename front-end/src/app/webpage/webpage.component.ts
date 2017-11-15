@@ -9,9 +9,6 @@ import { Router } from '@angular/router';
 export class WebpageComponent implements OnInit {
     isCollapsed: boolean = true;
 
-    // isCollapsed(){
-    //     this.show = !this.show
-    // }
   constructor( private router : Router) { }
 
  ngOnInit() {

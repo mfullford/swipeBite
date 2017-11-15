@@ -10,5 +10,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ngx-loading": "^1.0.8",
+    "request": "^2.83.0"
+  }
 }

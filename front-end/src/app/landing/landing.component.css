@@ -5,10 +5,6 @@
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) {
 
-img {
-	/*max-width: 40%;*/
-	/*margin-bottom: 5%;*/
-}
 .showCards {
 	width: 60%;
 

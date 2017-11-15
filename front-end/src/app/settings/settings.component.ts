@@ -44,26 +44,6 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-//need to fix to remove setting services
-
-  // saveZipcode(newZipcode) {
-  //     console.log("saving zipcode");
-  //     console.log(newZipcode);
-  //     this.settingsService.saveZipcode(newZipcode)
-  //             .subscribe(response => {
-  //           console.log(response.json());
-  //           let zipcode = response.json();
-  //       });
-  // }
-
-
- // getImage (newImage ) {
- //    this.settingsService.getImage(newImage)
- //    .subscribe( response => {
- //      let image = []
- //    })
- //  }
-
   callsNextPage() {
   	this.router.navigate(['/main']);
 
