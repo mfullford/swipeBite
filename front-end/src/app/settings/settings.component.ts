@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-settings',
@@ -44,25 +44,6 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-//need to fix to remove setting services
-
-  // saveZipcode(newZipcode) {
-  //     console.log("saving zipcode");
-  //     console.log(newZipcode);
-  //     this.settingsService.saveZipcode(newZipcode)
-  //             .subscribe(response => {
-  //           console.log(response.json());
-  //           let zipcode = response.json();
-  //       });
-  // }
-
-
- // getImage (newImage ) {
- //    this.settingsService.getImage(newImage)
- //    .subscribe( response => {
- //      let image = []
- //    })
- //  }
 
   callsNextPage() {
   	this.router.navigate(['/main']);

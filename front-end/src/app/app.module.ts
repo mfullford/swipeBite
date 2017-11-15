@@ -23,13 +23,12 @@ import { AdminComponent } from './admin/admin.component';
   declarations: [
     AppComponent,
     LandingComponent,
-    SettingsComponent,
     MainComponent,
     MatchedComponent,
     FavoritesComponent,
     WebpageComponent,
     AdminComponent
-
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +39,7 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     FormsModule
   ],
-
-  providers: [ ApiService],
+  providers: [ ApiService ],
   bootstrap: [ AppComponent ]
 
 })

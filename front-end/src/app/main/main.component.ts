@@ -8,30 +8,26 @@ import { ApiService } from '../api.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-	
-	isCollapsed: boolean;
-	coordinates : any;
- 	restaurant;
- 	newFood;
- 	currentUser;
 
-  constructor(private router: Router, private apiService : ApiService) {
-  	this.isCollapsed = true;
-  }
-  		
+  coordinates : any;
+   restaurant;
+   currentUser;
+  newFood;
+
+  constructor(private router: Router, private apiService : ApiService) {}
 
   ngOnInit() {
 
-  	// as soon as this page loads, grab the user's lat and long, and call the Google Places API
-		window.navigator.geolocation.getCurrentPosition(position => {
-			this.coordinates = {
-		  	latitude: position.coords.latitude,
-		  	longitude: position.coords.longitude
-			}
-			this.callGooglePlacesAPI();
-		});	
+    // as soon as this page loads, grab the user's lat and long, and call the Google Places API
+    window.navigator.geolocation.getCurrentPosition(position => {
+      this.coordinates = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+      this.callGooglePlacesAPI();
+    });  
 
-		this.determineCurrentUser();
+    this.determineCurrentUser();
   }
 
   // Gets Restaurant and Photo from Google Places API
@@ -40,58 +36,60 @@ export class MainComponent implements OnInit {
       coordinates: this.coordinates,
       user: this.currentUser
     }
-		this.apiService.callGooglePlacesAPI(apiObject)
-	    .subscribe(response => {
-	    this.restaurant = response.json();
-	 	});
-	}	
+    this.apiService.callGooglePlacesAPI(apiObject)
+      .subscribe(response => {
+      this.restaurant = response.json();
+     });
+  }  
 
   swipeLeft() {
-  	// calls the function to serve up the next image
-  	this.callGooglePlacesAPI();
+    // calls the function to serve up the next image
+    this.callGooglePlacesAPI();
   }
 
   swipeRight() {
-  	// creates Restaurant in the DB
-    console.log("Swiped right");
-  	this.apiService.createRestaurant(this.restaurant)
-
-			.subscribe(res1 => { 
-				let response = res1.json();
-				// console.log(response);
-				let newFood = {
-					photoUrl: this.restaurant.image,
-					restaurantId: response.id
-				}
-				this.router.navigate(['/matched']);
-				// console.log(this.restaurant);
-
-				// creates Food in the DB AFTER Restaurant is created
-				this.apiService.createFood(newFood)
-					.subscribe(res2 => {
-						console.log(res2.json());
-            this.router.navigate(['/matched']);
-					})
-					console.log(newFood);
-			});
+    // creates Restaurant in the DB
+    console.log("this is the restaurant we're sending to the DB");
+    console.log(this.restaurant);
+    this.apiService.createRestaurant(this.restaurant)
+      .subscribe(response => { 
+        console.log("this is the food that we saved to the database");
+        console.log(response.json());
+        this.router.navigate(['/matched']);
+    });
   }
+      
+  /*
+  ORIGINAL STUFF
+  swipeRight() {
+    // creates Restaurant in the DB
+    this.apiService.createRestaurant(this.restaurant)
+      .subscribe(res1 => { 
+        let response = res1.json();
+        console.log(response);
+        this.router.navigate(['/matched']);
+        console.log(this.restaurant);
+        // creates Food in the DB AFTER Restaurant is created
+        this.apiService.createFood(this.restaurant)
+          .subscribe(res2 => {
+            console.log(res2.json());
+            this.router.navigate(['/matched']);
+          })
+      });
+  }*/
 
   // DETERMINES WHICH USER IS CURRENTLY LOGGED IN
   determineCurrentUser() {
     //console.log('hitting determineCurrentUser function');
     this.apiService.determineCurrentUser()
     .subscribe(response => {
-    	//console.log(response.json());
+      //console.log(response.json());
       this.currentUser = response.json();
     })
   }
 
   callsNextPage() {
-  	this.router.navigate(['/matched']);
-  }
-
-  callsSettings() {
-    this.router.navigate(['/settings']);
+    this.router.navigate(['/matched']);
   }
 
 }
